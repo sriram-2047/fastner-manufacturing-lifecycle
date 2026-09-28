@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-IS_VERCEL = os.getenv("VERCEL") == "1"
+IS_VERCEL = bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME") or os.getenv("NOW_REGION"))
 
 if IS_VERCEL:
     DB_DIR = "/tmp"
@@ -16,8 +16,8 @@ if IS_VERCEL:
     if os.path.exists(repo_db) and not os.path.exists(DEFAULT_DB_PATH):
         try:
             shutil.copy2(repo_db, DEFAULT_DB_PATH)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"Error copying bundled db to /tmp: {e}")
 else:
     DB_DIR = os.path.join(BASE_DIR, "database")
     os.makedirs(DB_DIR, exist_ok=True)
@@ -38,13 +38,15 @@ db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind
 Base = declarative_base()
 Base.query = db_session.query_property()
 
-def init_db():
+def init_db(auto_seed=True):
     import models  # noqa: F401
     Base.metadata.create_all(bind=engine)
-    try:
-        from models import Batch
-        if db_session.query(Batch).count() == 0:
-            import seed
-            seed.seed_database(force=False)
-    except Exception:
-        pass
+    if auto_seed:
+        try:
+            from models import Batch
+            count = db_session.query(Batch).count()
+            if count == 0:
+                import seed
+                seed.run_seed(force=False)
+        except Exception as e:
+            print(f"Auto-seed error: {e}")

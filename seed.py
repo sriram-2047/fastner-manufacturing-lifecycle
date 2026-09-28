@@ -5,7 +5,10 @@ from database import db_session, init_db, engine, Base
 from models import Batch, BatchStatusHistory, QualityInspection, FastenerType
 
 def seed_database(force=False):
-    init_db()
+    return run_seed(force=force)
+
+def run_seed(force=False):
+    init_db(auto_seed=False)
     
     existing_batches = db_session.query(Batch).count()
     if existing_batches > 0 and not force:

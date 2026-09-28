@@ -45,8 +45,23 @@ else:
         return response
 
 # Ensure database tables exist at start
+_db_ready = False
+
+def ensure_db_ready():
+    global _db_ready
+    if not _db_ready:
+        try:
+            init_db()
+            _db_ready = True
+        except Exception as e:
+            print(f"Error ensuring database readiness: {e}")
+
 with app.app_context():
-    init_db()
+    ensure_db_ready()
+
+@app.before_request
+def before_request_hook():
+    ensure_db_ready()
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
