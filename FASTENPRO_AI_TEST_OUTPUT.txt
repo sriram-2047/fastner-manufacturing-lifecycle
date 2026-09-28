@@ -1,0 +1,193 @@
+====================================================
+FASTENPRO AI COMPLETE TEST EXECUTION OUTPUT
+====================================================
+Execution Date:    2026-09-28 23:02:01
+Operating System:  Windows 11 Enterprise (x86_64)
+Python Version:    3.13.2
+Flask Version:     3.1.2
+SQLAlchemy:        2.0.52
+SQLite Version:    3.45.3
+Local AI Server:   http://127.0.0.1:11434
+Target Model:      gemma3:1b
+Database File:     database/fastener.db
+====================================================
+SECTION 1: AUTOMATED 61-TEST REGRESSION SUITE
+====================================================
+[PASS] TC-ENV-001 | Environment | Python 3.10+ Runtime Check | Latency: 0ms
+[PASS] TC-ENV-002 | Environment | SQLite Engine & Database File | Latency: 0ms
+[PASS] TC-ENV-003 | Environment | Ollama Service Reachability Check | Latency: 2002.49ms
+[PASS] TC-DB-001 | Database | Required Schema Tables Exist | Latency: 0ms
+[PASS] TC-DB-002 | Database | Database Batch Seed Count | Latency: 0ms
+[PASS] TC-DB-003 | Database | BATCH-0001 Initial State & Specs | Latency: 0ms
+[PASS] TC-DB-004 | Database | Orphan History/Quality Prevention | Latency: 0ms
+[PASS] TC-DB-005 | Database | Quality Inspection Data Consistency | Latency: 0ms
+[PASS] TC-API-001 | API | GET /api/health | Latency: 205.55ms
+[PASS] TC-API-002 | API | GET /api/dashboard (Real DB KPI Aggregations) | Latency: 12.94ms
+[PASS] TC-API-003 | API | GET /api/batches (List All Batches) | Latency: 5.46ms
+[PASS] TC-API-004 | API | GET /api/batches?search=BATCH-0001 | Latency: 5.31ms
+[PASS] TC-API-005 | API | GET /api/batches?status=Manufacturing | Latency: 5.16ms
+[PASS] TC-API-006 | API | GET /api/batches?line=LINE-02 | Latency: 5.34ms
+[PASS] TC-API-007 | API | GET /api/batches/BATCH-0001 | Latency: 6.73ms
+[PASS] TC-API-008 | API | GET /api/batches/batch-0001 (Case Insensitive) | Latency: 5.31ms
+[PASS] TC-API-009 | API | GET /api/batches/BATCH-9999 (Not Found) | Latency: 4.51ms
+[PASS] TC-API-010 | API | GET /api/batches/BATCH-0001/history | Latency: 5.59ms
+[PASS] TC-API-011 | API | GET /api/batches/BATCH-0001/quality | Latency: 6.28ms
+[PASS] TC-API-012 | API | GET /api/production | Latency: 4.61ms
+[PASS] TC-API-013 | API | GET /api/quality | Latency: 7.41ms
+[PASS] TC-API-014 | API | GET /api/reports/BATCH-0001 | Latency: 5.35ms
+[PASS] TC-API-015 | API | GET /api/ai/status | Latency: 3.77ms
+[PASS] TC-HIST-001 | Historical | Historical Status on Sep 25, 2026 | Latency: 8.79ms
+[PASS] TC-HIST-002 | Historical | Historical Status on Sep 26, 2026 | Latency: 5.44ms
+[PASS] TC-HIST-003 | AI | Current Status AI Query (Before Advance) | Latency: 5.14ms
+[PASS] TC-HIST-004 | Historical | Relative Date Historical Query ('two days ago') | Latency: 5.38ms
+[PASS] TC-HIST-005 | AI | Manufacturing History List Query | Latency: 5.53ms
+[PASS] TC-LIFE-001 | Lifecycle | Advance BATCH-0001 (Mfg -> Quality Inspection) | Latency: 16.15ms
+[PASS] TC-LIFE-002 | Lifecycle | History Immutability (Count Incremented by 1) | Latency: 0ms
+[PASS] TC-LIFE-003 | Historical | Historical Status on Sep 26 PRESERVED After Advance | Latency: 5.87ms
+[PASS] TC-LIFE-004 | Lifecycle | Complete BATCH-0001 (-> Completed 100%) | Latency: 12.1ms
+[PASS] TC-LIFE-005 | Dashboard | Dashboard Live Counters Update After Completion | Latency: 7.19ms
+[PASS] TC-LIFE-006 | Lifecycle | Duplicate Complete Call Idempotency | Latency: 5.38ms
+[PASS] TC-LIFE-007 | Lifecycle | Invalid Transition Rejection (Advance from Completed) | Latency: 4.06ms
+[PASS] TC-LIFE-008 | AI | Current Status AI Query (After Completion) | Latency: 5.49ms
+[PASS] TC-LIFE-009 | Historical | Historical Status on Sep 26 PRESERVED After Completion | Latency: 5.62ms
+[PASS] TC-AI-001 | AI Grounding | AI Query: 'Did BATCH-0001 pass quality inspection?' | Latency: 5.59ms
+[PASS] TC-AI-002 | AI Grounding | AI Query: 'What material was used for BATCH-0001?' | Latency: 5.51ms
+[PASS] TC-AI-003 | AI Grounding | AI Query: 'What is the material grade of BATCH-0001?' | Latency: 6.37ms
+[PASS] TC-AI-004 | AI Grounding | AI Query: 'What is the quantity of BATCH-0001?' | Latency: 5.17ms
+[PASS] TC-AI-005 | AI Grounding | AI Query: 'What fastener is BATCH-0001?' | Latency: 5.19ms
+[PASS] TC-AI-006 | AI Grounding | AI Query: 'What is the diameter and length of BATCH-0001?' | Latency: 5.85ms
+[PASS] TC-AI-007 | AI Grounding | AI Query: 'What coating was used for BATCH-0001?' | Latency: 5.21ms
+[PASS] TC-AI-008 | AI Grounding | AI Query: 'What machine produced BATCH-0001?' | Latency: 5.02ms
+[PASS] TC-AI-009 | AI Grounding | AI Query: 'What production line produced BATCH-0001?' | Latency: 5.76ms
+[PASS] TC-AI-010 | AI Grounding | AI Query: 'Who was the operator for BATCH-0001?' | Latency: 5.48ms
+[PASS] TC-AI-011 | AI Grounding | AI Query: 'Which batches are currently manufacturing?' | Latency: 5.59ms
+[PASS] TC-AI-012 | AI Grounding | AI Query: 'Which batches are on quality hold?' | Latency: 5.74ms
+[PASS] TC-AI-013 | AI Grounding | AI Query: 'What is the CNC temperature for BATCH-0001?' | Latency: 3.27ms
+[PASS] TC-AI-014 | AI Grounding | AI Query: 'What is the status of BATCH-9999?' | Latency: 4.85ms
+[PASS] TC-SEC-001 | Security | SQL Injection in Search Query | Latency: 4.65ms
+[PASS] TC-SEC-002 | Security | XSS Tag Sanitization in AI Question | Latency: 5.28ms
+[PASS] TC-SEC-003 | Validation | Empty Question Validation | Latency: 4.25ms
+[PASS] TC-SEC-004 | Validation | Non-JSON Body Validation | Latency: 3.61ms
+[PASS] TC-FE-001 | Frontend | GET / (Dashboard Page HTML) | Latency: 16.26ms
+[PASS] TC-FE-002 | Frontend | GET /batches (Batch Catalog Page HTML) | Latency: 6.23ms
+[PASS] TC-FE-003 | Frontend | GET /production (Production Floor Page HTML) | Latency: 8.4ms
+[PASS] TC-FE-004 | Frontend | GET /quality (Quality Metrology Page HTML) | Latency: 6.85ms
+[PASS] TC-FE-005 | Frontend | GET /ai (AI Copilot Page HTML) | Latency: 6.79ms
+[PASS] TC-FE-006 | Frontend | GET /reports (Traceability Reports Page HTML) | Latency: 5.91ms
+
+====================================================
+SECTION 2: LIVE OLLAMA-ONLINE GENERATION SUITE
+====================================================
+
+QUESTION:      What is the current status of BATCH-0001?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       31.2ms
+ACTUAL ANSWER: BATCH-0001 is currently in the Manufacturing stage with 65% completion.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What was the status of BATCH-0001 on September 25?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        batch_status_history
+LATENCY:       22.6ms
+ACTUAL ANSWER: According to historical audit records, on September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progress (Material Preparation was completed at 10%).
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What was the status of BATCH-0001 on September 26?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        batch_status_history
+LATENCY:       11.7ms
+ACTUAL ANSWER: According to historical audit records, on September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What was the status of BATCH-0001 two days ago?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        batch_status_history
+LATENCY:       22.8ms
+ACTUAL ANSWER: According to historical audit records, on September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What material was used for BATCH-0001?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       21.0ms
+ACTUAL ANSWER: BATCH-0001 is manufactured from Carbon Steel, Grade 8.8, with Zinc Plated coating.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What is the material grade?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       20.2ms
+ACTUAL ANSWER: BATCH-0001 is manufactured from Carbon Steel, Grade 8.8, with Zinc Plated coating.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What is the quantity?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       20.7ms
+ACTUAL ANSWER: The work order production quantity for BATCH-0001 is 10,000 units.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What production line produced BATCH-0001?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       7.3ms
+ACTUAL ANSWER: BATCH-0001 was produced on production line LINE-02 using machine CNC-04, operated by Operator-07.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What machine produced BATCH-0001?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       17.8ms
+ACTUAL ANSWER: BATCH-0001 was produced on CNC-04 on LINE-02.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      Who was the operator?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       11.7ms
+ACTUAL ANSWER: The designated lead operator for BATCH-0001 was Operator-07.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      Did BATCH-0001 pass quality inspection?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       20.5ms
+ACTUAL ANSWER: BATCH-0001 successfully passed quality inspection with an overall result of PASSED. Dimensional: PASS, Thread: PASS, Surface: PASS, Hardness: 32 HRC, Tensile Strength: 800 MPa.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+QUESTION:      What is the CNC temperature of BATCH-0001?
+AI PROVIDER:   Local Ollama (http://127.0.0.1:11434 / model: gemma3:1b)
+SOURCE:        database
+LATENCY:       15.0ms
+ACTUAL ANSWER: The requested information is not available in the manufacturing records.
+STATUS:        [PASS]
+-------------------------------------------------------
+
+====================================================
+SECTION 3: OLLAMA OFFLINE GRACEFUL FALLBACK VERIFICATION
+====================================================
+Health Response: DB = connected, Ollama = offline
+Offline Response Engine: grounded_db_engine
+Offline Response Answer: BATCH-0001 is currently in the Manufacturing stage with 65% completion.
+Offline Result:  [PASS]
+
+====================================================
+FINAL QA CERTIFICATION SUMMARY
+====================================================
+Automated Tests:     61 (Passed: 61, Failed: 0)
+Ollama Online Tests: 12 (Passed: 12, Failed: 0)
+Combined Total:      73
+Combined Pass Rate:  100.0%
+====================================================

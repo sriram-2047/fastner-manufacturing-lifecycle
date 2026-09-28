@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Batches Directory — FASTENPRO AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Manufacturing Batches</h1>
+    <p class="page-subtitle">Complete registry of active, scheduled, and completed fastener work orders.</p>
+  </div>
+  <a href="/ai" class="btn btn-accent">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+    <span>Ask Copilot about Batches</span>
+  </a>
+</div>
+
+<!-- Filter Bar -->
+<div class="panel" style="padding: 1.25rem; margin-bottom: 1.5rem;">
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; flex: 1; max-width: 800px;">
+      <!-- Search Input -->
+      <div style="position: relative; flex: 1; min-width: 200px;">
+        <input 
+          type="text" 
+          id="batch-filter-search" 
+          class="search-input" 
+          placeholder="Filter by Batch #, Fastener, Material, Operator..." 
+          style="padding-left: 2.2rem;"
+        >
+        <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);">
+          🔍
+        </span>
+      </div>
+
+      <!-- Status Filter -->
+      <select id="batch-filter-status" class="search-input" style="width: auto; min-width: 170px;">
+        <option value="ALL">All Statuses</option>
+        <option value="Scheduled">Scheduled</option>
+        <option value="Material Preparation">Material Preparation</option>
+        <option value="Manufacturing">Manufacturing</option>
+        <option value="Quality Inspection">Quality Inspection</option>
+        <option value="Completed">Completed</option>
+        <option value="Quality Hold">Quality Hold</option>
+      </select>
+
+      <!-- Line Filter -->
+      <select id="batch-filter-line" class="search-input" style="width: auto; min-width: 130px;">
+        <option value="ALL">All Lines</option>
+        <option value="LINE-01">LINE-01</option>
+        <option value="LINE-02">LINE-02</option>
+        <option value="LINE-03">LINE-03</option>
+        <option value="LINE-04">LINE-04</option>
+      </select>
+    </div>
+
+    <div>
+      <span style="font-size: 0.85rem; color: var(--text-secondary);" id="batch-count-badge">Showing 0 batches</span>
+    </div>
+  </div>
+</div>
+
+<!-- Batches Table Panel -->
+<div class="panel">
+  <div class="table-responsive">
+    <table class="industrial-table" id="all-batches-table">
+      <thead>
+        <tr>
+          <th>Batch Number</th>
+          <th>Fastener / Part</th>
+          <th>Material & Grade</th>
+          <th>Quantity</th>
+          <th>Production Line</th>
+          <th>Status</th>
+          <th>Progress</th>
+          <th>Expected Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="all-batches-tbody">
+        <tr>
+          <td colspan="9" class="loading-placeholder">
+            <div class="spinner"></div>
+            <span>Loading batch catalog...</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/batches.js') }}"></script>
+{% endblock %}

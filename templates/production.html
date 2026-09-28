@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Production Floor — FASTENPRO AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Active Production Floor</h1>
+    <p class="page-subtitle">Real-time status of machining, cold forming, threading, and heat treatment lines.</p>
+  </div>
+  <div style="display: flex; gap: 0.75rem;">
+    <a href="/batches" class="btn btn-secondary">All Batches</a>
+    <a href="/ai" class="btn btn-accent">Ask Production Copilot</a>
+  </div>
+</div>
+
+<!-- Production Line Grid -->
+<div id="production-lines-container">
+  <div class="panel">
+    <div class="loading-placeholder">
+      <div class="spinner"></div>
+      <span>Loading active production floor metrics...</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/production.js') }}"></script>
+{% endblock %}

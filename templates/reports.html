@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Batch Production Report — FASTENPRO AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">FASTENPRO Manufacturing Report</h1>
+    <p class="page-subtitle">Fastener Production Traceability Summary, lifecycle audit, and QA sign-off sheet.</p>
+  </div>
+  <div style="display: flex; gap: 0.75rem;">
+    <button class="btn btn-secondary btn-print" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+      <span>Print / Save PDF</span>
+    </button>
+  </div>
+</div>
+
+<!-- Batch Selector Panel -->
+<div class="panel" style="padding: 1.25rem; margin-bottom: 1.5rem;">
+  <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+    <label for="report-batch-select" style="font-weight: 600; font-size: 0.9rem; color: #fff;">
+      Select Manufacturing Batch:
+    </label>
+    <select id="report-batch-select" class="search-input" style="width: auto; min-width: 250px;">
+      <option value="">Loading batches...</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="loadSelectedReport()">Generate Report</button>
+  </div>
+</div>
+
+<!-- Production Report Container -->
+<div id="report-content-container" data-initial-batch="{{ selected_batch }}">
+  <div class="panel">
+    <div class="loading-placeholder">
+      <div class="spinner"></div>
+      <span>Generating batch production report...</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+{% endblock %}

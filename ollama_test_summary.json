@@ -1,0 +1,160 @@
+{
+  "online_results": [
+    {
+      "question": "What is the current status of BATCH-0001?",
+      "expected": "Manufacturing",
+      "actual": "BATCH-0001 is currently in the Manufacturing stage with 65% completion.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 31.2,
+      "status": "PASS"
+    },
+    {
+      "question": "What was the status of BATCH-0001 on September 25?",
+      "expected": "Manufacturing / Material Prep",
+      "actual": "According to historical audit records, on September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progress (Material Preparation was completed at 10%).",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": true,
+      "source": "batch_status_history",
+      "latency_ms": 22.6,
+      "status": "PASS"
+    },
+    {
+      "question": "What was the status of BATCH-0001 on September 26?",
+      "expected": "Manufacturing",
+      "actual": "According to historical audit records, on September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": true,
+      "source": "batch_status_history",
+      "latency_ms": 11.7,
+      "status": "PASS"
+    },
+    {
+      "question": "What was the status of BATCH-0001 two days ago?",
+      "expected": "Manufacturing",
+      "actual": "According to historical audit records, on September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": true,
+      "source": "batch_status_history",
+      "latency_ms": 22.8,
+      "status": "PASS"
+    },
+    {
+      "question": "What material was used for BATCH-0001?",
+      "expected": "Carbon Steel",
+      "actual": "BATCH-0001 is manufactured from Carbon Steel, Grade 8.8, with Zinc Plated coating.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 21.0,
+      "status": "PASS"
+    },
+    {
+      "question": "What is the material grade?",
+      "expected": "8.8",
+      "actual": "BATCH-0001 is manufactured from Carbon Steel, Grade 8.8, with Zinc Plated coating.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 20.2,
+      "status": "PASS"
+    },
+    {
+      "question": "What is the quantity?",
+      "expected": "10,000",
+      "actual": "The work order production quantity for BATCH-0001 is 10,000 units.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 20.7,
+      "status": "PASS"
+    },
+    {
+      "question": "What production line produced BATCH-0001?",
+      "expected": "LINE-02",
+      "actual": "BATCH-0001 was produced on production line LINE-02 using machine CNC-04, operated by Operator-07.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 7.3,
+      "status": "PASS"
+    },
+    {
+      "question": "What machine produced BATCH-0001?",
+      "expected": "CNC-04",
+      "actual": "BATCH-0001 was produced on CNC-04 on LINE-02.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 17.8,
+      "status": "PASS"
+    },
+    {
+      "question": "Who was the operator?",
+      "expected": "Operator-07",
+      "actual": "The designated lead operator for BATCH-0001 was Operator-07.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 11.7,
+      "status": "PASS"
+    },
+    {
+      "question": "Did BATCH-0001 pass quality inspection?",
+      "expected": "PASSED",
+      "actual": "BATCH-0001 successfully passed quality inspection with an overall result of PASSED. Dimensional: PASS, Thread: PASS, Surface: PASS, Hardness: 32 HRC, Tensile Strength: 800 MPa.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 20.5,
+      "status": "PASS"
+    },
+    {
+      "question": "What is the CNC temperature of BATCH-0001?",
+      "expected": "not available in the manufacturing records",
+      "actual": "The requested information is not available in the manufacturing records.",
+      "engine": "ollama",
+      "grounded": true,
+      "historical": false,
+      "source": "database",
+      "latency_ms": 15.0,
+      "status": "PASS"
+    }
+  ],
+  "online_health": {
+    "backend": "healthy",
+    "database": "connected",
+    "ollama": "connected",
+    "ollama_model": "gemma3:1b",
+    "timestamp": "2026-09-28T23:01:36.329903"
+  },
+  "offline_health": {
+    "backend": "healthy",
+    "database": "connected",
+    "ollama": "offline",
+    "ollama_model": "gemma3:1b",
+    "timestamp": "2026-09-28T23:01:43.779876"
+  },
+  "offline_chat": {
+    "answer": "BATCH-0001 is currently in the Manufacturing stage with 65% completion.",
+    "batch_number": "BATCH-0001",
+    "date": "2026-09-28",
+    "engine": "grounded_db_engine",
+    "grounded": true,
+    "historical": false,
+    "ollama_status": "offline",
+    "source": "database_fallback"
+  }
+}

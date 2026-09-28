@@ -1,0 +1,1945 @@
+{
+  "results": [
+    {
+      "id": "TC-ENV-001",
+      "category": "Environment",
+      "name": "Python 3.10+ Runtime Check",
+      "expected": ">= 3.10.0",
+      "actual": "3.13.2",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-ENV-002",
+      "category": "Environment",
+      "name": "SQLite Engine & Database File",
+      "expected": "SQLite connected",
+      "actual": "SQLite v3.45.3",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-ENV-003",
+      "category": "Environment",
+      "name": "Ollama Service Reachability Check",
+      "expected": "Connected or Truthful Offline Status",
+      "actual": "Offline (Graceful Fallback Active)",
+      "status": "PASS",
+      "latency_ms": 2002.49,
+      "details": {}
+    },
+    {
+      "id": "TC-DB-001",
+      "category": "Database",
+      "name": "Required Schema Tables Exist",
+      "expected": "['batches', 'batch_status_history', 'quality_inspections', 'fastener_types']",
+      "actual": "['fastener_types', 'batches', 'batch_status_history', 'quality_inspections']",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-DB-002",
+      "category": "Database",
+      "name": "Database Batch Seed Count",
+      "expected": ">= 10 batches",
+      "actual": "12 batches",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-DB-003",
+      "category": "Database",
+      "name": "BATCH-0001 Initial State & Specs",
+      "expected": "Hex Bolt, Carbon Steel 8.8, 10000 units, LINE-02, CNC-04, Manufacturing 65%",
+      "actual": "Hex Bolt, Carbon Steel 8.8, 10000 units, LINE-02, CNC-04, Manufacturing 65%",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-DB-004",
+      "category": "Database",
+      "name": "Orphan History/Quality Prevention",
+      "expected": "0 orphans",
+      "actual": "0 orphan history, 0 orphan QA",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-DB-005",
+      "category": "Database",
+      "name": "Quality Inspection Data Consistency",
+      "expected": "0 contradictory records",
+      "actual": "0 contradictory records",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-API-001",
+      "category": "API",
+      "name": "GET /api/health",
+      "expected": "200 OK with database=connected",
+      "actual": "200 DB: connected, Ollama: offline",
+      "status": "PASS",
+      "latency_ms": 205.55,
+      "details": {
+        "data": {
+          "backend": "healthy",
+          "database": "connected",
+          "ollama": "offline",
+          "ollama_model": "gemma3:1b",
+          "timestamp": "2026-09-28T23:01:56.439395"
+        },
+        "success": true
+      }
+    },
+    {
+      "id": "TC-API-002",
+      "category": "API",
+      "name": "GET /api/dashboard (Real DB KPI Aggregations)",
+      "expected": "Total: 12, Active Mfg: 3, Completed: 3, Hold: 1, Units: 182200",
+      "actual": "Total: 12, Active Mfg: 3, Completed: 3, Hold: 1, Units: 182200",
+      "status": "PASS",
+      "latency_ms": 12.94,
+      "details": {
+        "active_manufacturing": 3,
+        "completed": 3,
+        "completed_units": 59500,
+        "distribution": [
+          {
+            "count": 1,
+            "fastener_type": "Anchor Bolt",
+            "total_units": 4500
+          },
+          {
+            "count": 1,
+            "fastener_type": "Carriage Bolt",
+            "total_units": 18000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Eye Bolt",
+            "total_units": 3200
+          },
+          {
+            "count": 1,
+            "fastener_type": "Flange Bolt",
+            "total_units": 6000
+          },
+          {
+            "count": 2,
+            "fastener_type": "Hex Bolt",
+            "total_units": 15000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Hex Nut",
+            "total_units": 15000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Rivet",
+            "total_units": 30000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Self-Tapping Screw",
+            "total_units": 50000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Socket Head Cap Screw",
+            "total_units": 12500
+          },
+          {
+            "count": 1,
+            "fastener_type": "Stud",
+            "total_units": 8000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Washer",
+            "total_units": 20000
+          }
+        ],
+        "material_prep": 1,
+        "quality_hold": 1,
+        "quality_inspection": 2,
+        "recent_batches": [
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0012",
+            "coating": "Yellow Zinc Dichromate",
+            "created_at": "2026-09-24T16:00:00",
+            "current_status": "Quality Inspection",
+            "customer": "CraneRig Solutions",
+            "diameter": "M16",
+            "expected_completion": "2026-09-29T17:00:00",
+            "fastener_type": "Eye Bolt",
+            "grade": "8.8",
+            "head_type": "Forged Eye Ring",
+            "id": 12,
+            "length": "75 mm",
+            "machine": "FORGE-02",
+            "manufacturing_start": "2026-09-25T08:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-02",
+            "part_number": "EB-M16-075",
+            "production_line": "LINE-02",
+            "progress": 90,
+            "quantity": 3200,
+            "thread_pitch": "2.0 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T14:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0002",
+            "coating": "Zinc Plated",
+            "created_at": "2026-09-26T08:00:00",
+            "current_status": "Manufacturing",
+            "customer": "Apex Automotive Corp",
+            "diameter": "M10",
+            "expected_completion": "2026-09-30T17:00:00",
+            "fastener_type": "Hex Nut",
+            "grade": "8.8",
+            "head_type": "Hexagonal",
+            "id": 2,
+            "length": "8.4 mm",
+            "machine": "CNC-01",
+            "manufacturing_start": "2026-09-26T09:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-03",
+            "part_number": "HN-M10-150",
+            "production_line": "LINE-01",
+            "progress": 72,
+            "quantity": 15000,
+            "thread_pitch": "1.5 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T11:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0003",
+            "coating": "Passivated",
+            "created_at": "2026-09-24T07:00:00",
+            "current_status": "Quality Inspection",
+            "customer": "Marine Dynamics Ltd",
+            "diameter": "M10",
+            "expected_completion": "2026-09-28T18:00:00",
+            "fastener_type": "Washer",
+            "grade": "A2-70",
+            "head_type": "Flat Disc",
+            "id": 3,
+            "length": "2 mm",
+            "machine": "PRESS-02",
+            "manufacturing_start": "2026-09-24T08:00:00",
+            "material": "Stainless Steel",
+            "operator": "Operator-05",
+            "part_number": "WS-M10-FLAT",
+            "production_line": "LINE-03",
+            "progress": 90,
+            "quantity": 20000,
+            "thread_pitch": "N/A",
+            "thread_type": "N/A",
+            "updated_at": "2026-09-28T10:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0005",
+            "coating": "Black Oxide",
+            "created_at": "2026-09-23T11:00:00",
+            "current_status": "Manufacturing",
+            "customer": "Nordic Heavy Machinery",
+            "diameter": "M8",
+            "expected_completion": "2026-09-29T16:00:00",
+            "fastener_type": "Socket Head Cap Screw",
+            "grade": "12.9",
+            "head_type": "Cylindrical Hex Socket",
+            "id": 5,
+            "length": "35 mm",
+            "machine": "CNC-02",
+            "manufacturing_start": "2026-09-24T07:30:00",
+            "material": "Alloy Steel",
+            "operator": "Operator-07",
+            "part_number": "SHCS-M08-035",
+            "production_line": "LINE-01",
+            "progress": 82,
+            "quantity": 12500,
+            "thread_pitch": "1.25 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T08:45:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0007",
+            "coating": "Anodized Clear",
+            "created_at": "2026-09-27T09:00:00",
+            "current_status": "Material Preparation",
+            "customer": "AeroStructures Global",
+            "diameter": "6 mm",
+            "expected_completion": "2026-10-01T16:00:00",
+            "fastener_type": "Rivet",
+            "grade": "Commercial",
+            "head_type": "Button Head",
+            "id": 7,
+            "length": "15 mm",
+            "machine": "COLD-01",
+            "manufacturing_start": "2026-09-28T08:00:00",
+            "material": "Aluminum 6061-T6",
+            "operator": "Operator-04",
+            "part_number": "RIV-D06-015",
+            "production_line": "LINE-03",
+            "progress": 10,
+            "quantity": 30000,
+            "thread_pitch": "N/A",
+            "thread_type": "None (Smooth Shank)",
+            "updated_at": "2026-09-28T08:30:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0011",
+            "coating": "Polished",
+            "created_at": "2026-09-28T08:00:00",
+            "current_status": "Scheduled",
+            "customer": "SolarMount Technologies",
+            "diameter": "M8",
+            "expected_completion": "2026-10-03T17:00:00",
+            "fastener_type": "Carriage Bolt",
+            "grade": "A2-70",
+            "head_type": "Round Domed Head with Square Neck",
+            "id": 11,
+            "length": "40 mm",
+            "machine": "PRESS-03",
+            "manufacturing_start": "2026-09-30T08:00:00",
+            "material": "Stainless Steel",
+            "operator": "Operator-08",
+            "part_number": "CB-M08-040",
+            "production_line": "LINE-04",
+            "progress": 0,
+            "quantity": 18000,
+            "thread_pitch": "1.25 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T08:00:00"
+          }
+        ],
+        "scheduled": 2,
+        "total_batches": 12,
+        "total_units": 182200
+      }
+    },
+    {
+      "id": "TC-API-003",
+      "category": "API",
+      "name": "GET /api/batches (List All Batches)",
+      "expected": "200 OK with 12 batches",
+      "actual": "200 with 12 batches",
+      "status": "PASS",
+      "latency_ms": 5.46,
+      "details": {}
+    },
+    {
+      "id": "TC-API-004",
+      "category": "API",
+      "name": "GET /api/batches?search=BATCH-0001",
+      "expected": "1 matching batch",
+      "actual": "1 matching batch(es)",
+      "status": "PASS",
+      "latency_ms": 5.31,
+      "details": {}
+    },
+    {
+      "id": "TC-API-005",
+      "category": "API",
+      "name": "GET /api/batches?status=Manufacturing",
+      "expected": "3 manufacturing batches",
+      "actual": "3 batches returned",
+      "status": "PASS",
+      "latency_ms": 5.16,
+      "details": {}
+    },
+    {
+      "id": "TC-API-006",
+      "category": "API",
+      "name": "GET /api/batches?line=LINE-02",
+      "expected": "5 LINE-02 batches",
+      "actual": "5 batches returned",
+      "status": "PASS",
+      "latency_ms": 5.34,
+      "details": {}
+    },
+    {
+      "id": "TC-API-007",
+      "category": "API",
+      "name": "GET /api/batches/BATCH-0001",
+      "expected": "200 OK with full batch details",
+      "actual": "200 Status: Manufacturing, Progress: 65%",
+      "status": "PASS",
+      "latency_ms": 6.73,
+      "details": {}
+    },
+    {
+      "id": "TC-API-008",
+      "category": "API",
+      "name": "GET /api/batches/batch-0001 (Case Insensitive)",
+      "expected": "200 OK resolving to BATCH-0001",
+      "actual": "200 Batch: BATCH-0001",
+      "status": "PASS",
+      "latency_ms": 5.31,
+      "details": {}
+    },
+    {
+      "id": "TC-API-009",
+      "category": "API",
+      "name": "GET /api/batches/BATCH-9999 (Not Found)",
+      "expected": "404 Not Found error",
+      "actual": "404 Error: Batch BATCH-9999 was not found.",
+      "status": "PASS",
+      "latency_ms": 4.51,
+      "details": {}
+    },
+    {
+      "id": "TC-API-010",
+      "category": "API",
+      "name": "GET /api/batches/BATCH-0001/history",
+      "expected": "200 OK with 3 initial history records",
+      "actual": "200 with 3 records",
+      "status": "PASS",
+      "latency_ms": 5.59,
+      "details": {}
+    },
+    {
+      "id": "TC-API-011",
+      "category": "API",
+      "name": "GET /api/batches/BATCH-0001/quality",
+      "expected": "200 OK with PASSED overall result",
+      "actual": "200 Result: PASSED, Hardness: 32 HRC",
+      "status": "PASS",
+      "latency_ms": 6.28,
+      "details": {}
+    },
+    {
+      "id": "TC-API-012",
+      "category": "API",
+      "name": "GET /api/production",
+      "expected": "200 OK with active production lines",
+      "actual": "200 with 3 production line groups",
+      "status": "PASS",
+      "latency_ms": 4.61,
+      "details": {}
+    },
+    {
+      "id": "TC-API-013",
+      "category": "API",
+      "name": "GET /api/quality",
+      "expected": "200 OK with QA KPIs & quarantine log",
+      "actual": "200 Passed: 4, Hold: 1, Failed: 0",
+      "status": "PASS",
+      "latency_ms": 7.41,
+      "details": {}
+    },
+    {
+      "id": "TC-API-014",
+      "category": "API",
+      "name": "GET /api/reports/BATCH-0001",
+      "expected": "200 OK with full traceability report",
+      "actual": "200 Batch: BATCH-0001, Status: Manufacturing",
+      "status": "PASS",
+      "latency_ms": 5.35,
+      "details": {}
+    },
+    {
+      "id": "TC-API-015",
+      "category": "API",
+      "name": "GET /api/ai/status",
+      "expected": "200 OK with AI engine status",
+      "actual": "200 Provider: None, Status: None",
+      "status": "PASS",
+      "latency_ms": 3.77,
+      "details": {}
+    },
+    {
+      "id": "TC-HIST-001",
+      "category": "Historical",
+      "name": "Historical Status on Sep 25, 2026",
+      "expected": "Material Preparation / Manufacturing (20%)",
+      "actual": "Answer: On September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progre... [Source: batch_status_history]",
+      "status": "PASS",
+      "latency_ms": 8.79,
+      "details": {
+        "answer": "On September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progress.",
+        "raw": {
+          "answer": "On September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progress.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "On September 25, 2026, BATCH-0001 was in the Manufacturing stage with 20% progress.",
+            "batch_number": "BATCH-0001",
+            "date": "2026-09-25",
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": true,
+            "ollama_status": "offline",
+            "source": "batch_status_history"
+          },
+          "date": "2026-09-25",
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": true,
+          "ollama_status": "offline",
+          "source": "batch_status_history",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-HIST-002",
+      "category": "Historical",
+      "name": "Historical Status on Sep 26, 2026",
+      "expected": "Manufacturing at 65%",
+      "actual": "Answer: On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progre...",
+      "status": "PASS",
+      "latency_ms": 5.44,
+      "details": {
+        "answer": "On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress."
+      }
+    },
+    {
+      "id": "TC-HIST-003",
+      "category": "AI",
+      "name": "Current Status AI Query (Before Advance)",
+      "expected": "Manufacturing (65%)",
+      "actual": "Answer: BATCH-0001 is currently in the Manufacturing stage with 65% completion....",
+      "status": "PASS",
+      "latency_ms": 5.14,
+      "details": {
+        "answer": "BATCH-0001 is currently in the Manufacturing stage with 65% completion."
+      }
+    },
+    {
+      "id": "TC-HIST-004",
+      "category": "Historical",
+      "name": "Relative Date Historical Query ('two days ago')",
+      "expected": "Manufacturing at 65%",
+      "actual": "Answer: On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progre...",
+      "status": "PASS",
+      "latency_ms": 5.38,
+      "details": {
+        "answer": "On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress."
+      }
+    },
+    {
+      "id": "TC-HIST-005",
+      "category": "AI",
+      "name": "Manufacturing History List Query",
+      "expected": "Audit trail with Material Prep and Manufacturing",
+      "actual": "Answer: Manufacturing history for BATCH-0001:\n- 25 Sep 2026, 08:30: Material Preparation...",
+      "status": "PASS",
+      "latency_ms": 5.53,
+      "details": {
+        "answer": "Manufacturing history for BATCH-0001:\n- 25 Sep 2026, 08:30: Material Preparation (10%) \u2014 Raw material issued.\n- 25 Sep 2026, 14:00: Manufacturing (20%) \u2014 Manufacturing started.\n- 26 Sep 2026, 16:30: Manufacturing (65%) \u2014 Production reached 65%."
+      }
+    },
+    {
+      "id": "TC-LIFE-001",
+      "category": "Lifecycle",
+      "name": "Advance BATCH-0001 (Mfg -> Quality Inspection)",
+      "expected": "Quality Inspection, 90% progress",
+      "actual": "200 Status: Quality Inspection, Progress: 90%",
+      "status": "PASS",
+      "latency_ms": 16.15,
+      "details": {
+        "data": {
+          "actual_completion": null,
+          "batch": {
+            "actual_completion": null,
+            "batch_number": "BATCH-0001",
+            "coating": "Zinc Plated",
+            "created_at": "2026-09-25T07:30:00",
+            "current_status": "Quality Inspection",
+            "customer": "Apex Automotive Corp",
+            "diameter": "M10",
+            "expected_completion": "2026-09-27T18:00:00",
+            "fastener_type": "Hex Bolt",
+            "grade": "8.8",
+            "head_type": "Hexagonal",
+            "history": [
+              {
+                "batch_id": 1,
+                "formatted_date": "28 Sep 2026, 23:01",
+                "id": 44,
+                "progress": 90,
+                "remarks": "Production completed; routed to Quality Assurance lab.",
+                "status": "Quality Inspection",
+                "timestamp": "2026-09-28T23:01:56.560483"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "26 Sep 2026, 16:30",
+                "id": 3,
+                "progress": 65,
+                "remarks": "Production reached 65%.",
+                "status": "Manufacturing",
+                "timestamp": "2026-09-26T16:30:00"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "25 Sep 2026, 14:00",
+                "id": 2,
+                "progress": 20,
+                "remarks": "Manufacturing started.",
+                "status": "Manufacturing",
+                "timestamp": "2026-09-25T14:00:00"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "25 Sep 2026, 08:30",
+                "id": 1,
+                "progress": 10,
+                "remarks": "Raw material issued.",
+                "status": "Material Preparation",
+                "timestamp": "2026-09-25T08:30:00"
+              }
+            ],
+            "id": 1,
+            "latest_quality": {
+              "batch_id": 1,
+              "dimensional_result": "PASS",
+              "formatted_date": "27 Sep 2026, 14:00",
+              "hardness": "32 HRC",
+              "id": 1,
+              "inspection_date": "2026-09-27T14:00:00",
+              "overall_result": "PASSED",
+              "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+              "surface_result": "PASS",
+              "tensile_strength": "800 MPa",
+              "thread_result": "PASS"
+            },
+            "length": "50 mm",
+            "machine": "CNC-04",
+            "manufacturing_start": "2026-09-25T08:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-07",
+            "part_number": "HB-M10-050",
+            "production_line": "LINE-02",
+            "progress": 90,
+            "quality": [
+              {
+                "batch_id": 1,
+                "dimensional_result": "PASS",
+                "formatted_date": "27 Sep 2026, 14:00",
+                "hardness": "32 HRC",
+                "id": 1,
+                "inspection_date": "2026-09-27T14:00:00",
+                "overall_result": "PASSED",
+                "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+                "surface_result": "PASS",
+                "tensile_strength": "800 MPa",
+                "thread_result": "PASS"
+              }
+            ],
+            "quantity": 10000,
+            "thread_pitch": "1.5 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T23:01:56.560483"
+          },
+          "batch_number": "BATCH-0001",
+          "coating": "Zinc Plated",
+          "created_at": "2026-09-25T07:30:00",
+          "current_status": "Quality Inspection",
+          "customer": "Apex Automotive Corp",
+          "diameter": "M10",
+          "expected_completion": "2026-09-27T18:00:00",
+          "fastener_type": "Hex Bolt",
+          "grade": "8.8",
+          "head_type": "Hexagonal",
+          "history": [
+            {
+              "batch_id": 1,
+              "formatted_date": "28 Sep 2026, 23:01",
+              "id": 44,
+              "progress": 90,
+              "remarks": "Production completed; routed to Quality Assurance lab.",
+              "status": "Quality Inspection",
+              "timestamp": "2026-09-28T23:01:56.560483"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "26 Sep 2026, 16:30",
+              "id": 3,
+              "progress": 65,
+              "remarks": "Production reached 65%.",
+              "status": "Manufacturing",
+              "timestamp": "2026-09-26T16:30:00"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "25 Sep 2026, 14:00",
+              "id": 2,
+              "progress": 20,
+              "remarks": "Manufacturing started.",
+              "status": "Manufacturing",
+              "timestamp": "2026-09-25T14:00:00"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "25 Sep 2026, 08:30",
+              "id": 1,
+              "progress": 10,
+              "remarks": "Raw material issued.",
+              "status": "Material Preparation",
+              "timestamp": "2026-09-25T08:30:00"
+            }
+          ],
+          "history_entry": {
+            "batch_id": 1,
+            "formatted_date": "28 Sep 2026, 23:01",
+            "id": 44,
+            "progress": 90,
+            "remarks": "Production completed; routed to Quality Assurance lab.",
+            "status": "Quality Inspection",
+            "timestamp": "2026-09-28T23:01:56.560483"
+          },
+          "id": 1,
+          "latest_quality": {
+            "batch_id": 1,
+            "dimensional_result": "PASS",
+            "formatted_date": "27 Sep 2026, 14:00",
+            "hardness": "32 HRC",
+            "id": 1,
+            "inspection_date": "2026-09-27T14:00:00",
+            "overall_result": "PASSED",
+            "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+            "surface_result": "PASS",
+            "tensile_strength": "800 MPa",
+            "thread_result": "PASS"
+          },
+          "length": "50 mm",
+          "machine": "CNC-04",
+          "manufacturing_start": "2026-09-25T08:00:00",
+          "material": "Carbon Steel",
+          "operator": "Operator-07",
+          "part_number": "HB-M10-050",
+          "production_line": "LINE-02",
+          "progress": 90,
+          "quality": [
+            {
+              "batch_id": 1,
+              "dimensional_result": "PASS",
+              "formatted_date": "27 Sep 2026, 14:00",
+              "hardness": "32 HRC",
+              "id": 1,
+              "inspection_date": "2026-09-27T14:00:00",
+              "overall_result": "PASSED",
+              "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+              "surface_result": "PASS",
+              "tensile_strength": "800 MPa",
+              "thread_result": "PASS"
+            }
+          ],
+          "quantity": 10000,
+          "thread_pitch": "1.5 mm",
+          "thread_type": "Metric",
+          "updated_at": "2026-09-28T23:01:56.560483"
+        },
+        "message": "Batch BATCH-0001 advanced successfully.",
+        "success": true
+      }
+    },
+    {
+      "id": "TC-LIFE-002",
+      "category": "Lifecycle",
+      "name": "History Immutability (Count Incremented by 1)",
+      "expected": "4 history records (3 initial + 1 new)",
+      "actual": "4 history records",
+      "status": "PASS",
+      "latency_ms": 0,
+      "details": {}
+    },
+    {
+      "id": "TC-LIFE-003",
+      "category": "Historical",
+      "name": "Historical Status on Sep 26 PRESERVED After Advance",
+      "expected": "Manufacturing (65%)",
+      "actual": "Answer: On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progre...",
+      "status": "PASS",
+      "latency_ms": 5.87,
+      "details": {
+        "answer": "On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress."
+      }
+    },
+    {
+      "id": "TC-LIFE-004",
+      "category": "Lifecycle",
+      "name": "Complete BATCH-0001 (-> Completed 100%)",
+      "expected": "Completed, 100% progress, actual_completion set",
+      "actual": "200 Status: Completed, Progress: 100%, Actual Completion: 2026-09-28T23:01:56.587786",
+      "status": "PASS",
+      "latency_ms": 12.1,
+      "details": {
+        "data": {
+          "actual_completion": "2026-09-28T23:01:56.587786",
+          "batch": {
+            "actual_completion": "2026-09-28T23:01:56.587786",
+            "batch_number": "BATCH-0001",
+            "coating": "Zinc Plated",
+            "created_at": "2026-09-25T07:30:00",
+            "current_status": "Completed",
+            "customer": "Apex Automotive Corp",
+            "diameter": "M10",
+            "expected_completion": "2026-09-27T18:00:00",
+            "fastener_type": "Hex Bolt",
+            "grade": "8.8",
+            "head_type": "Hexagonal",
+            "history": [
+              {
+                "batch_id": 1,
+                "formatted_date": "28 Sep 2026, 23:01",
+                "id": 45,
+                "progress": 100,
+                "remarks": "Batch completed successfully.",
+                "status": "Completed",
+                "timestamp": "2026-09-28T23:01:56.587786"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "28 Sep 2026, 23:01",
+                "id": 44,
+                "progress": 90,
+                "remarks": "Production completed; routed to Quality Assurance lab.",
+                "status": "Quality Inspection",
+                "timestamp": "2026-09-28T23:01:56.560483"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "26 Sep 2026, 16:30",
+                "id": 3,
+                "progress": 65,
+                "remarks": "Production reached 65%.",
+                "status": "Manufacturing",
+                "timestamp": "2026-09-26T16:30:00"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "25 Sep 2026, 14:00",
+                "id": 2,
+                "progress": 20,
+                "remarks": "Manufacturing started.",
+                "status": "Manufacturing",
+                "timestamp": "2026-09-25T14:00:00"
+              },
+              {
+                "batch_id": 1,
+                "formatted_date": "25 Sep 2026, 08:30",
+                "id": 1,
+                "progress": 10,
+                "remarks": "Raw material issued.",
+                "status": "Material Preparation",
+                "timestamp": "2026-09-25T08:30:00"
+              }
+            ],
+            "id": 1,
+            "latest_quality": {
+              "batch_id": 1,
+              "dimensional_result": "PASS",
+              "formatted_date": "27 Sep 2026, 14:00",
+              "hardness": "32 HRC",
+              "id": 1,
+              "inspection_date": "2026-09-27T14:00:00",
+              "overall_result": "PASSED",
+              "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+              "surface_result": "PASS",
+              "tensile_strength": "800 MPa",
+              "thread_result": "PASS"
+            },
+            "length": "50 mm",
+            "machine": "CNC-04",
+            "manufacturing_start": "2026-09-25T08:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-07",
+            "part_number": "HB-M10-050",
+            "production_line": "LINE-02",
+            "progress": 100,
+            "quality": [
+              {
+                "batch_id": 1,
+                "dimensional_result": "PASS",
+                "formatted_date": "27 Sep 2026, 14:00",
+                "hardness": "32 HRC",
+                "id": 1,
+                "inspection_date": "2026-09-27T14:00:00",
+                "overall_result": "PASSED",
+                "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+                "surface_result": "PASS",
+                "tensile_strength": "800 MPa",
+                "thread_result": "PASS"
+              }
+            ],
+            "quantity": 10000,
+            "thread_pitch": "1.5 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T23:01:56.587786"
+          },
+          "batch_number": "BATCH-0001",
+          "coating": "Zinc Plated",
+          "created_at": "2026-09-25T07:30:00",
+          "current_status": "Completed",
+          "customer": "Apex Automotive Corp",
+          "diameter": "M10",
+          "expected_completion": "2026-09-27T18:00:00",
+          "fastener_type": "Hex Bolt",
+          "grade": "8.8",
+          "head_type": "Hexagonal",
+          "history": [
+            {
+              "batch_id": 1,
+              "formatted_date": "28 Sep 2026, 23:01",
+              "id": 45,
+              "progress": 100,
+              "remarks": "Batch completed successfully.",
+              "status": "Completed",
+              "timestamp": "2026-09-28T23:01:56.587786"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "28 Sep 2026, 23:01",
+              "id": 44,
+              "progress": 90,
+              "remarks": "Production completed; routed to Quality Assurance lab.",
+              "status": "Quality Inspection",
+              "timestamp": "2026-09-28T23:01:56.560483"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "26 Sep 2026, 16:30",
+              "id": 3,
+              "progress": 65,
+              "remarks": "Production reached 65%.",
+              "status": "Manufacturing",
+              "timestamp": "2026-09-26T16:30:00"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "25 Sep 2026, 14:00",
+              "id": 2,
+              "progress": 20,
+              "remarks": "Manufacturing started.",
+              "status": "Manufacturing",
+              "timestamp": "2026-09-25T14:00:00"
+            },
+            {
+              "batch_id": 1,
+              "formatted_date": "25 Sep 2026, 08:30",
+              "id": 1,
+              "progress": 10,
+              "remarks": "Raw material issued.",
+              "status": "Material Preparation",
+              "timestamp": "2026-09-25T08:30:00"
+            }
+          ],
+          "history_entry": {
+            "batch_id": 1,
+            "formatted_date": "28 Sep 2026, 23:01",
+            "id": 45,
+            "progress": 100,
+            "remarks": "Batch completed successfully.",
+            "status": "Completed",
+            "timestamp": "2026-09-28T23:01:56.587786"
+          },
+          "id": 1,
+          "latest_quality": {
+            "batch_id": 1,
+            "dimensional_result": "PASS",
+            "formatted_date": "27 Sep 2026, 14:00",
+            "hardness": "32 HRC",
+            "id": 1,
+            "inspection_date": "2026-09-27T14:00:00",
+            "overall_result": "PASSED",
+            "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+            "surface_result": "PASS",
+            "tensile_strength": "800 MPa",
+            "thread_result": "PASS"
+          },
+          "length": "50 mm",
+          "machine": "CNC-04",
+          "manufacturing_start": "2026-09-25T08:00:00",
+          "material": "Carbon Steel",
+          "operator": "Operator-07",
+          "part_number": "HB-M10-050",
+          "production_line": "LINE-02",
+          "progress": 100,
+          "quality": [
+            {
+              "batch_id": 1,
+              "dimensional_result": "PASS",
+              "formatted_date": "27 Sep 2026, 14:00",
+              "hardness": "32 HRC",
+              "id": 1,
+              "inspection_date": "2026-09-27T14:00:00",
+              "overall_result": "PASSED",
+              "remarks": "All critical dimensions, thread pitch, and surface coating meet ISO 898-1 standards.",
+              "surface_result": "PASS",
+              "tensile_strength": "800 MPa",
+              "thread_result": "PASS"
+            }
+          ],
+          "quantity": 10000,
+          "thread_pitch": "1.5 mm",
+          "thread_type": "Metric",
+          "updated_at": "2026-09-28T23:01:56.587786"
+        },
+        "message": "Batch BATCH-0001 completed successfully.",
+        "success": true
+      }
+    },
+    {
+      "id": "TC-LIFE-005",
+      "category": "Dashboard",
+      "name": "Dashboard Live Counters Update After Completion",
+      "expected": "Completed batches: 4, Completed units: 69500",
+      "actual": "Completed: 4, Completed Units: 69500",
+      "status": "PASS",
+      "latency_ms": 7.19,
+      "details": {
+        "active_manufacturing": 2,
+        "completed": 4,
+        "completed_units": 69500,
+        "distribution": [
+          {
+            "count": 1,
+            "fastener_type": "Anchor Bolt",
+            "total_units": 4500
+          },
+          {
+            "count": 1,
+            "fastener_type": "Carriage Bolt",
+            "total_units": 18000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Eye Bolt",
+            "total_units": 3200
+          },
+          {
+            "count": 1,
+            "fastener_type": "Flange Bolt",
+            "total_units": 6000
+          },
+          {
+            "count": 2,
+            "fastener_type": "Hex Bolt",
+            "total_units": 15000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Hex Nut",
+            "total_units": 15000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Rivet",
+            "total_units": 30000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Self-Tapping Screw",
+            "total_units": 50000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Socket Head Cap Screw",
+            "total_units": 12500
+          },
+          {
+            "count": 1,
+            "fastener_type": "Stud",
+            "total_units": 8000
+          },
+          {
+            "count": 1,
+            "fastener_type": "Washer",
+            "total_units": 20000
+          }
+        ],
+        "material_prep": 1,
+        "quality_hold": 1,
+        "quality_inspection": 2,
+        "recent_batches": [
+          {
+            "actual_completion": "2026-09-28T23:01:56.587786",
+            "batch_number": "BATCH-0001",
+            "coating": "Zinc Plated",
+            "created_at": "2026-09-25T07:30:00",
+            "current_status": "Completed",
+            "customer": "Apex Automotive Corp",
+            "diameter": "M10",
+            "expected_completion": "2026-09-27T18:00:00",
+            "fastener_type": "Hex Bolt",
+            "grade": "8.8",
+            "head_type": "Hexagonal",
+            "id": 1,
+            "length": "50 mm",
+            "machine": "CNC-04",
+            "manufacturing_start": "2026-09-25T08:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-07",
+            "part_number": "HB-M10-050",
+            "production_line": "LINE-02",
+            "progress": 100,
+            "quantity": 10000,
+            "thread_pitch": "1.5 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T23:01:56.587786"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0012",
+            "coating": "Yellow Zinc Dichromate",
+            "created_at": "2026-09-24T16:00:00",
+            "current_status": "Quality Inspection",
+            "customer": "CraneRig Solutions",
+            "diameter": "M16",
+            "expected_completion": "2026-09-29T17:00:00",
+            "fastener_type": "Eye Bolt",
+            "grade": "8.8",
+            "head_type": "Forged Eye Ring",
+            "id": 12,
+            "length": "75 mm",
+            "machine": "FORGE-02",
+            "manufacturing_start": "2026-09-25T08:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-02",
+            "part_number": "EB-M16-075",
+            "production_line": "LINE-02",
+            "progress": 90,
+            "quantity": 3200,
+            "thread_pitch": "2.0 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T14:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0002",
+            "coating": "Zinc Plated",
+            "created_at": "2026-09-26T08:00:00",
+            "current_status": "Manufacturing",
+            "customer": "Apex Automotive Corp",
+            "diameter": "M10",
+            "expected_completion": "2026-09-30T17:00:00",
+            "fastener_type": "Hex Nut",
+            "grade": "8.8",
+            "head_type": "Hexagonal",
+            "id": 2,
+            "length": "8.4 mm",
+            "machine": "CNC-01",
+            "manufacturing_start": "2026-09-26T09:00:00",
+            "material": "Carbon Steel",
+            "operator": "Operator-03",
+            "part_number": "HN-M10-150",
+            "production_line": "LINE-01",
+            "progress": 72,
+            "quantity": 15000,
+            "thread_pitch": "1.5 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T11:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0003",
+            "coating": "Passivated",
+            "created_at": "2026-09-24T07:00:00",
+            "current_status": "Quality Inspection",
+            "customer": "Marine Dynamics Ltd",
+            "diameter": "M10",
+            "expected_completion": "2026-09-28T18:00:00",
+            "fastener_type": "Washer",
+            "grade": "A2-70",
+            "head_type": "Flat Disc",
+            "id": 3,
+            "length": "2 mm",
+            "machine": "PRESS-02",
+            "manufacturing_start": "2026-09-24T08:00:00",
+            "material": "Stainless Steel",
+            "operator": "Operator-05",
+            "part_number": "WS-M10-FLAT",
+            "production_line": "LINE-03",
+            "progress": 90,
+            "quantity": 20000,
+            "thread_pitch": "N/A",
+            "thread_type": "N/A",
+            "updated_at": "2026-09-28T10:00:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0005",
+            "coating": "Black Oxide",
+            "created_at": "2026-09-23T11:00:00",
+            "current_status": "Manufacturing",
+            "customer": "Nordic Heavy Machinery",
+            "diameter": "M8",
+            "expected_completion": "2026-09-29T16:00:00",
+            "fastener_type": "Socket Head Cap Screw",
+            "grade": "12.9",
+            "head_type": "Cylindrical Hex Socket",
+            "id": 5,
+            "length": "35 mm",
+            "machine": "CNC-02",
+            "manufacturing_start": "2026-09-24T07:30:00",
+            "material": "Alloy Steel",
+            "operator": "Operator-07",
+            "part_number": "SHCS-M08-035",
+            "production_line": "LINE-01",
+            "progress": 82,
+            "quantity": 12500,
+            "thread_pitch": "1.25 mm",
+            "thread_type": "Metric",
+            "updated_at": "2026-09-28T08:45:00"
+          },
+          {
+            "actual_completion": null,
+            "batch_number": "BATCH-0007",
+            "coating": "Anodized Clear",
+            "created_at": "2026-09-27T09:00:00",
+            "current_status": "Material Preparation",
+            "customer": "AeroStructures Global",
+            "diameter": "6 mm",
+            "expected_completion": "2026-10-01T16:00:00",
+            "fastener_type": "Rivet",
+            "grade": "Commercial",
+            "head_type": "Button Head",
+            "id": 7,
+            "length": "15 mm",
+            "machine": "COLD-01",
+            "manufacturing_start": "2026-09-28T08:00:00",
+            "material": "Aluminum 6061-T6",
+            "operator": "Operator-04",
+            "part_number": "RIV-D06-015",
+            "production_line": "LINE-03",
+            "progress": 10,
+            "quantity": 30000,
+            "thread_pitch": "N/A",
+            "thread_type": "None (Smooth Shank)",
+            "updated_at": "2026-09-28T08:30:00"
+          }
+        ],
+        "scheduled": 2,
+        "total_batches": 12,
+        "total_units": 182200
+      }
+    },
+    {
+      "id": "TC-LIFE-006",
+      "category": "Lifecycle",
+      "name": "Duplicate Complete Call Idempotency",
+      "expected": "No duplicate history record created (total stays 5)",
+      "actual": "History count: 5, Msg: Batch is already completed.",
+      "status": "PASS",
+      "latency_ms": 5.38,
+      "details": {}
+    },
+    {
+      "id": "TC-LIFE-007",
+      "category": "Lifecycle",
+      "name": "Invalid Transition Rejection (Advance from Completed)",
+      "expected": "409 Conflict error",
+      "actual": "409 Error: Invalid lifecycle transition from Completed.",
+      "status": "PASS",
+      "latency_ms": 4.06,
+      "details": {}
+    },
+    {
+      "id": "TC-LIFE-008",
+      "category": "AI",
+      "name": "Current Status AI Query (After Completion)",
+      "expected": "Completed (100%)",
+      "actual": "Answer: BATCH-0001 is currently Completed (100% progress)....",
+      "status": "PASS",
+      "latency_ms": 5.49,
+      "details": {
+        "answer": "BATCH-0001 is currently Completed (100% progress)."
+      }
+    },
+    {
+      "id": "TC-LIFE-009",
+      "category": "Historical",
+      "name": "Historical Status on Sep 26 PRESERVED After Completion",
+      "expected": "Manufacturing (65%)",
+      "actual": "Answer: On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progre...",
+      "status": "PASS",
+      "latency_ms": 5.62,
+      "details": {
+        "answer": "On September 26, 2026, BATCH-0001 was in the Manufacturing stage with 65% progress."
+      }
+    },
+    {
+      "id": "TC-AI-001",
+      "category": "AI Grounding",
+      "name": "AI Query: 'Did BATCH-0001 pass quality inspection?'",
+      "expected": "PASSED (Dimensional: PASS, Thread: PASS, Surface: PASS, Hardness: 32 HRC, Tensile: 800 MPa)",
+      "actual": "Answer: BATCH-0001 passed quality inspection. Dimensional, thread, and surface insp...",
+      "status": "PASS",
+      "latency_ms": 5.59,
+      "details": {
+        "question": "Did BATCH-0001 pass quality inspection?",
+        "answer": "BATCH-0001 passed quality inspection. Dimensional, thread, and surface inspections passed, with an overall result of PASSED (Hardness: 32 HRC, Tensile Strength: 800 MPa).",
+        "data": {
+          "answer": "BATCH-0001 passed quality inspection. Dimensional, thread, and surface inspections passed, with an overall result of PASSED (Hardness: 32 HRC, Tensile Strength: 800 MPa).",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 passed quality inspection. Dimensional, thread, and surface inspections passed, with an overall result of PASSED (Hardness: 32 HRC, Tensile Strength: 800 MPa).",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-002",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What material was used for BATCH-0001?'",
+      "expected": "Carbon Steel",
+      "actual": "Answer: BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated c...",
+      "status": "PASS",
+      "latency_ms": 5.51,
+      "details": {
+        "question": "What material was used for BATCH-0001?",
+        "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+        "data": {
+          "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-003",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What is the material grade of BATCH-0001?'",
+      "expected": "8.8",
+      "actual": "Answer: BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated c...",
+      "status": "PASS",
+      "latency_ms": 6.37,
+      "details": {
+        "question": "What is the material grade of BATCH-0001?",
+        "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+        "data": {
+          "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is manufactured from Carbon Steel (Grade 8.8) with Zinc Plated coating.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-004",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What is the quantity of BATCH-0001?'",
+      "expected": "10,000",
+      "actual": "Answer: The production quantity for BATCH-0001 is 10,000 units....",
+      "status": "PASS",
+      "latency_ms": 5.17,
+      "details": {
+        "question": "What is the quantity of BATCH-0001?",
+        "answer": "The production quantity for BATCH-0001 is 10,000 units.",
+        "data": {
+          "answer": "The production quantity for BATCH-0001 is 10,000 units.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "The production quantity for BATCH-0001 is 10,000 units.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-005",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What fastener is BATCH-0001?'",
+      "expected": "Hex Bolt",
+      "actual": "Answer: BATCH-0001 is a Hex Bolt (Part Number: HB-M10-050, Diameter: M10, Length: 5...",
+      "status": "PASS",
+      "latency_ms": 5.19,
+      "details": {
+        "question": "What fastener is BATCH-0001?",
+        "answer": "BATCH-0001 is a Hex Bolt (Part Number: HB-M10-050, Diameter: M10, Length: 50 mm).",
+        "data": {
+          "answer": "BATCH-0001 is a Hex Bolt (Part Number: HB-M10-050, Diameter: M10, Length: 50 mm).",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is a Hex Bolt (Part Number: HB-M10-050, Diameter: M10, Length: 50 mm).",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-006",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What is the diameter and length of BATCH-0001?'",
+      "expected": "Diameter: M10, Length: 50 mm",
+      "actual": "Answer: BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50...",
+      "status": "PASS",
+      "latency_ms": 5.85,
+      "details": {
+        "question": "What is the diameter and length of BATCH-0001?",
+        "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+        "data": {
+          "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-007",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What coating was used for BATCH-0001?'",
+      "expected": "Zinc Plated",
+      "actual": "Answer: BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50...",
+      "status": "PASS",
+      "latency_ms": 5.21,
+      "details": {
+        "question": "What coating was used for BATCH-0001?",
+        "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+        "data": {
+          "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 specifications: Hex Bolt (HB-M10-050), Diameter: M10, Length: 50 mm, Thread: Metric (Pitch: 1.5 mm), Head: Hexagonal, Coating: Zinc Plated.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-008",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What machine produced BATCH-0001?'",
+      "expected": "CNC-04",
+      "actual": "Answer: BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operato...",
+      "status": "PASS",
+      "latency_ms": 5.02,
+      "details": {
+        "question": "What machine produced BATCH-0001?",
+        "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+        "data": {
+          "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-009",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What production line produced BATCH-0001?'",
+      "expected": "LINE-02",
+      "actual": "Answer: BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operato...",
+      "status": "PASS",
+      "latency_ms": 5.76,
+      "details": {
+        "question": "What production line produced BATCH-0001?",
+        "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+        "data": {
+          "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-010",
+      "category": "AI Grounding",
+      "name": "AI Query: 'Who was the operator for BATCH-0001?'",
+      "expected": "Operator-07",
+      "actual": "Answer: BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operato...",
+      "status": "PASS",
+      "latency_ms": 5.48,
+      "details": {
+        "question": "Who was the operator for BATCH-0001?",
+        "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+        "data": {
+          "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "BATCH-0001 is produced on LINE-02 using machine CNC-04, operated by Operator-07.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-011",
+      "category": "AI Grounding",
+      "name": "AI Query: 'Which batches are currently manufacturing?'",
+      "expected": "Batches in Manufacturing (BATCH-0002, BATCH-0005, etc.)",
+      "actual": "Answer: Currently 2 batches are in Manufacturing: BATCH-0002 (Hex Nut, 72%), BATCH-...",
+      "status": "PASS",
+      "latency_ms": 5.59,
+      "details": {
+        "question": "Which batches are currently manufacturing?",
+        "answer": "Currently 2 batches are in Manufacturing: BATCH-0002 (Hex Nut, 72%), BATCH-0005 (Socket Head Cap Screw, 82%).",
+        "data": {
+          "answer": "Currently 2 batches are in Manufacturing: BATCH-0002 (Hex Nut, 72%), BATCH-0005 (Socket Head Cap Screw, 82%).",
+          "batch_number": null,
+          "data": {
+            "answer": "Currently 2 batches are in Manufacturing: BATCH-0002 (Hex Nut, 72%), BATCH-0005 (Socket Head Cap Screw, 82%).",
+            "batch_number": null,
+            "date": "2026-09-28",
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": "2026-09-28",
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-012",
+      "category": "AI Grounding",
+      "name": "AI Query: 'Which batches are on quality hold?'",
+      "expected": "BATCH-0009 on Quality Hold",
+      "actual": "Answer: Currently 1 batch is on Quality Hold: BATCH-0009 (Flange Bolt, Line: LINE-0...",
+      "status": "PASS",
+      "latency_ms": 5.74,
+      "details": {
+        "question": "Which batches are on quality hold?",
+        "answer": "Currently 1 batch is on Quality Hold: BATCH-0009 (Flange Bolt, Line: LINE-01).",
+        "data": {
+          "answer": "Currently 1 batch is on Quality Hold: BATCH-0009 (Flange Bolt, Line: LINE-01).",
+          "batch_number": null,
+          "data": {
+            "answer": "Currently 1 batch is on Quality Hold: BATCH-0009 (Flange Bolt, Line: LINE-01).",
+            "batch_number": null,
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-013",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What is the CNC temperature for BATCH-0001?'",
+      "expected": "The requested information is not available in the manufacturing records.",
+      "actual": "Answer: The requested information is not available in the manufacturing records....",
+      "status": "PASS",
+      "latency_ms": 3.27,
+      "details": {
+        "question": "What is the CNC temperature for BATCH-0001?",
+        "answer": "The requested information is not available in the manufacturing records.",
+        "data": {
+          "answer": "The requested information is not available in the manufacturing records.",
+          "batch_number": "BATCH-0001",
+          "data": {
+            "answer": "The requested information is not available in the manufacturing records.",
+            "batch_number": "BATCH-0001",
+            "date": null,
+            "engine": "grounded_db_engine",
+            "grounded": true,
+            "historical": false,
+            "ollama_status": "offline",
+            "source": "database_fallback"
+          },
+          "date": null,
+          "engine": "grounded_db_engine",
+          "grounded": true,
+          "historical": false,
+          "ollama_status": "offline",
+          "source": "database_fallback",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-AI-014",
+      "category": "AI Grounding",
+      "name": "AI Query: 'What is the status of BATCH-9999?'",
+      "expected": "Batch BATCH-9999 was not found in the database.",
+      "actual": "Answer: Batch BATCH-9999 was not found....",
+      "status": "PASS",
+      "latency_ms": 4.85,
+      "details": {
+        "question": "What is the status of BATCH-9999?",
+        "answer": "Batch BATCH-9999 was not found.",
+        "data": {
+          "answer": "Batch BATCH-9999 was not found.",
+          "batch_number": "BATCH-9999",
+          "data": {
+            "answer": "Batch BATCH-9999 was not found.",
+            "batch_number": "BATCH-9999",
+            "date": null,
+            "engine": "database",
+            "grounded": true,
+            "historical": false,
+            "source": "database"
+          },
+          "date": null,
+          "engine": "database",
+          "grounded": true,
+          "historical": false,
+          "source": "database",
+          "success": true
+        }
+      }
+    },
+    {
+      "id": "TC-SEC-001",
+      "category": "Security",
+      "name": "SQL Injection in Search Query",
+      "expected": "0 unauthorized records / safe query execution",
+      "actual": "0 records returned",
+      "status": "PASS",
+      "latency_ms": 4.65,
+      "details": {}
+    },
+    {
+      "id": "TC-SEC-002",
+      "category": "Security",
+      "name": "XSS Tag Sanitization in AI Question",
+      "expected": "Safe handling without script execution / grounded response",
+      "actual": "Answer: Based on manufacturing records:\nCURRENT BATCH DETAILS:\n- Bat...",
+      "status": "PASS",
+      "latency_ms": 5.28,
+      "details": {}
+    },
+    {
+      "id": "TC-SEC-003",
+      "category": "Validation",
+      "name": "Empty Question Validation",
+      "expected": "400 Bad Request error",
+      "actual": "400 Error: Please provide a valid question.",
+      "status": "PASS",
+      "latency_ms": 4.25,
+      "details": {}
+    },
+    {
+      "id": "TC-SEC-004",
+      "category": "Validation",
+      "name": "Non-JSON Body Validation",
+      "expected": "400 Bad Request error",
+      "actual": "400 Status",
+      "status": "PASS",
+      "latency_ms": 3.61,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-001",
+      "category": "Frontend",
+      "name": "GET / (Dashboard Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (12699 bytes)",
+      "status": "PASS",
+      "latency_ms": 16.26,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-002",
+      "category": "Frontend",
+      "name": "GET /batches (Batch Catalog Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (8888 bytes)",
+      "status": "PASS",
+      "latency_ms": 6.23,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-003",
+      "category": "Frontend",
+      "name": "GET /production (Production Floor Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (6416 bytes)",
+      "status": "PASS",
+      "latency_ms": 8.4,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-004",
+      "category": "Frontend",
+      "name": "GET /quality (Quality Metrology Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (9794 bytes)",
+      "status": "PASS",
+      "latency_ms": 6.85,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-005",
+      "category": "Frontend",
+      "name": "GET /ai (AI Copilot Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (10020 bytes)",
+      "status": "PASS",
+      "latency_ms": 6.79,
+      "details": {}
+    },
+    {
+      "id": "TC-FE-006",
+      "category": "Frontend",
+      "name": "GET /reports (Traceability Reports Page HTML)",
+      "expected": "200 OK HTML",
+      "actual": "200 (7351 bytes)",
+      "status": "PASS",
+      "latency_ms": 5.91,
+      "details": {}
+    }
+  ],
+  "logs": [
+    "======================================================================",
+    "FASTENPRO AI \u2014 COMPLETE VALIDATION & TEST EXECUTION",
+    "Date: 2026-09-28T23:01:54.229013",
+    "Target Server: http://127.0.0.1:5000",
+    "Database Path: C:\\Users\\srira\\OneDrive\\Desktop\\project\\database\\fastener.db",
+    "======================================================================",
+    "\n--- Category A: Environment Testing ---",
+    "[PASS] TC-ENV-001: Python 3.10+ Runtime Check -> PASS (0ms)",
+    "[PASS] TC-ENV-002: SQLite Engine & Database File -> PASS (0ms)",
+    "[PASS] TC-ENV-003: Ollama Service Reachability Check -> PASS (2002.5ms)",
+    "\n--- Category B: Database Testing ---",
+    "[PASS] TC-DB-001: Required Schema Tables Exist -> PASS (0ms)",
+    "[PASS] TC-DB-002: Database Batch Seed Count -> PASS (0ms)",
+    "[PASS] TC-DB-003: BATCH-0001 Initial State & Specs -> PASS (0ms)",
+    "[PASS] TC-DB-004: Orphan History/Quality Prevention -> PASS (0ms)",
+    "[PASS] TC-DB-005: Quality Inspection Data Consistency -> PASS (0ms)",
+    "\n--- Category C: API Testing ---",
+    "[PASS] TC-API-001: GET /api/health -> PASS (205.6ms)",
+    "[PASS] TC-API-002: GET /api/dashboard (Real DB KPI Aggregations) -> PASS (12.9ms)",
+    "[PASS] TC-API-003: GET /api/batches (List All Batches) -> PASS (5.5ms)",
+    "[PASS] TC-API-004: GET /api/batches?search=BATCH-0001 -> PASS (5.3ms)",
+    "[PASS] TC-API-005: GET /api/batches?status=Manufacturing -> PASS (5.2ms)",
+    "[PASS] TC-API-006: GET /api/batches?line=LINE-02 -> PASS (5.3ms)",
+    "[PASS] TC-API-007: GET /api/batches/BATCH-0001 -> PASS (6.7ms)",
+    "[PASS] TC-API-008: GET /api/batches/batch-0001 (Case Insensitive) -> PASS (5.3ms)",
+    "[PASS] TC-API-009: GET /api/batches/BATCH-9999 (Not Found) -> PASS (4.5ms)",
+    "[PASS] TC-API-010: GET /api/batches/BATCH-0001/history -> PASS (5.6ms)",
+    "[PASS] TC-API-011: GET /api/batches/BATCH-0001/quality -> PASS (6.3ms)",
+    "[PASS] TC-API-012: GET /api/production -> PASS (4.6ms)",
+    "[PASS] TC-API-013: GET /api/quality -> PASS (7.4ms)",
+    "[PASS] TC-API-014: GET /api/reports/BATCH-0001 -> PASS (5.4ms)",
+    "[PASS] TC-API-015: GET /api/ai/status -> PASS (3.8ms)",
+    "\n--- Category D: Historical Data & AI Grounding ---",
+    "[PASS] TC-HIST-001: Historical Status on Sep 25, 2026 -> PASS (8.8ms)",
+    "[PASS] TC-HIST-002: Historical Status on Sep 26, 2026 -> PASS (5.4ms)",
+    "[PASS] TC-HIST-003: Current Status AI Query (Before Advance) -> PASS (5.1ms)",
+    "[PASS] TC-HIST-004: Relative Date Historical Query ('two days ago') -> PASS (5.4ms)",
+    "[PASS] TC-HIST-005: Manufacturing History List Query -> PASS (5.5ms)",
+    "\n--- Category E: Batch Lifecycle Testing ---",
+    "[PASS] TC-LIFE-001: Advance BATCH-0001 (Mfg -> Quality Inspection) -> PASS (16.1ms)",
+    "[PASS] TC-LIFE-002: History Immutability (Count Incremented by 1) -> PASS (0ms)",
+    "[PASS] TC-LIFE-003: Historical Status on Sep 26 PRESERVED After Advance -> PASS (5.9ms)",
+    "[PASS] TC-LIFE-004: Complete BATCH-0001 (-> Completed 100%) -> PASS (12.1ms)",
+    "[PASS] TC-LIFE-005: Dashboard Live Counters Update After Completion -> PASS (7.2ms)",
+    "[PASS] TC-LIFE-006: Duplicate Complete Call Idempotency -> PASS (5.4ms)",
+    "[PASS] TC-LIFE-007: Invalid Transition Rejection (Advance from Completed) -> PASS (4.1ms)",
+    "[PASS] TC-LIFE-008: Current Status AI Query (After Completion) -> PASS (5.5ms)",
+    "[PASS] TC-LIFE-009: Historical Status on Sep 26 PRESERVED After Completion -> PASS (5.6ms)",
+    "\n--- Category F: AI Grounding & Metrology Questions ---",
+    "[PASS] TC-AI-001: AI Query: 'Did BATCH-0001 pass quality inspection?' -> PASS (5.6ms)",
+    "[PASS] TC-AI-002: AI Query: 'What material was used for BATCH-0001?' -> PASS (5.5ms)",
+    "[PASS] TC-AI-003: AI Query: 'What is the material grade of BATCH-0001?' -> PASS (6.4ms)",
+    "[PASS] TC-AI-004: AI Query: 'What is the quantity of BATCH-0001?' -> PASS (5.2ms)",
+    "[PASS] TC-AI-005: AI Query: 'What fastener is BATCH-0001?' -> PASS (5.2ms)",
+    "[PASS] TC-AI-006: AI Query: 'What is the diameter and length of BATCH-0001?' -> PASS (5.8ms)",
+    "[PASS] TC-AI-007: AI Query: 'What coating was used for BATCH-0001?' -> PASS (5.2ms)",
+    "[PASS] TC-AI-008: AI Query: 'What machine produced BATCH-0001?' -> PASS (5.0ms)",
+    "[PASS] TC-AI-009: AI Query: 'What production line produced BATCH-0001?' -> PASS (5.8ms)",
+    "[PASS] TC-AI-010: AI Query: 'Who was the operator for BATCH-0001?' -> PASS (5.5ms)",
+    "[PASS] TC-AI-011: AI Query: 'Which batches are currently manufacturing?' -> PASS (5.6ms)",
+    "[PASS] TC-AI-012: AI Query: 'Which batches are on quality hold?' -> PASS (5.7ms)",
+    "[PASS] TC-AI-013: AI Query: 'What is the CNC temperature for BATCH-0001?' -> PASS (3.3ms)",
+    "[PASS] TC-AI-014: AI Query: 'What is the status of BATCH-9999?' -> PASS (4.8ms)",
+    "\n--- Category G: Security & Error Handling ---",
+    "[PASS] TC-SEC-001: SQL Injection in Search Query -> PASS (4.7ms)",
+    "[PASS] TC-SEC-002: XSS Tag Sanitization in AI Question -> PASS (5.3ms)",
+    "[PASS] TC-SEC-003: Empty Question Validation -> PASS (4.2ms)",
+    "[PASS] TC-SEC-004: Non-JSON Body Validation -> PASS (3.6ms)",
+    "\n--- Category H: Frontend HTML Routes ---",
+    "[PASS] TC-FE-001: GET / (Dashboard Page HTML) -> PASS (16.3ms)",
+    "[PASS] TC-FE-002: GET /batches (Batch Catalog Page HTML) -> PASS (6.2ms)",
+    "[PASS] TC-FE-003: GET /production (Production Floor Page HTML) -> PASS (8.4ms)",
+    "[PASS] TC-FE-004: GET /quality (Quality Metrology Page HTML) -> PASS (6.9ms)",
+    "[PASS] TC-FE-005: GET /ai (AI Copilot Page HTML) -> PASS (6.8ms)",
+    "[PASS] TC-FE-006: GET /reports (Traceability Reports Page HTML) -> PASS (5.9ms)",
+    "\n======================================================================",
+    "TESTING SUMMARY",
+    "======================================================================",
+    "Total Tests:    61",
+    "Passed:         61",
+    "Failed:         0",
+    "Blocked:        0",
+    "Pass Rate:      100.0%",
+    "======================================================================"
+  ],
+  "total": 61,
+  "passed": 61,
+  "failed": 0,
+  "blocked": 0,
+  "pass_pct": 100.0
+}

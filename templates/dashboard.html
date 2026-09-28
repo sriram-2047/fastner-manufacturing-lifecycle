@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — FASTENPRO AI{% endblock %}
+
+{% block content %}
+<!-- Hero Batch Search Banner -->
+<div class="hero-search-card">
+  <div class="hero-title">
+    <span>FASTENPRO AI</span>
+    <span class="hero-tag">Enterprise Intelligence</span>
+  </div>
+  <p class="hero-desc">
+    Real-time manufacturing lifecycle tracking, quality assurance metrology, and database-grounded AI copilot for fastener production operations.
+  </p>
+  <form class="hero-search-form" id="dashboard-search-form">
+    <input 
+      type="text" 
+      id="dashboard-search-input" 
+      class="hero-search-input" 
+      placeholder="Enter Batch Number (e.g. BATCH-0001)" 
+      autocomplete="off"
+    >
+    <button type="submit" class="hero-search-btn" id="hero-search-submit">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Inspect Batch</span>
+    </button>
+  </form>
+</div>
+
+<!-- KPI Summary Cards -->
+<div class="kpi-grid">
+  <!-- Total Batches -->
+  <div class="kpi-card total" id="card-total-batches">
+    <div class="kpi-header">
+      <span class="kpi-label">Total Batches</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="kpi-total-batches">--</div>
+    <div class="kpi-footer">
+      <span id="kpi-total-units">-- units across plant</span>
+    </div>
+  </div>
+
+  <!-- Active Manufacturing -->
+  <div class="kpi-card active-mfg" id="card-active-mfg">
+    <div class="kpi-header">
+      <span class="kpi-label">Active Manufacturing</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="kpi-active-manufacturing" style="color: #fbbf24;">--</div>
+    <div class="kpi-footer">
+      <span>On production lines 1-4</span>
+    </div>
+  </div>
+
+  <!-- Completed -->
+  <div class="kpi-card completed" id="card-completed">
+    <div class="kpi-header">
+      <span class="kpi-label">Completed</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="kpi-completed" style="color: #34d399;">--</div>
+    <div class="kpi-footer">
+      <span id="kpi-completed-units">-- units dispatched</span>
+    </div>
+  </div>
+
+  <!-- Quality Hold -->
+  <div class="kpi-card hold" id="card-quality-hold">
+    <div class="kpi-header">
+      <span class="kpi-label">Quality Hold</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="kpi-quality-hold" style="color: #f87171;">--</div>
+    <div class="kpi-footer">
+      <span>Pending MRB review</span>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard Grid (Recent Batches + Quick AI Query) -->
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;" class="specs-grid">
+  <!-- Recent Batches Panel -->
+  <div class="panel">
+    <div class="panel-header">
+      <h2 class="panel-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+        <span>Recent Production Batches</span>
+      </h2>
+      <a href="/batches" class="btn btn-secondary btn-sm">View All Batches →</a>
+    </div>
+
+    <div class="table-responsive">
+      <table class="industrial-table" id="recent-batches-table">
+        <thead>
+          <tr>
+            <th>Batch Number</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Progress</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="recent-batches-tbody">
+          <tr>
+            <td colspan="6" class="loading-placeholder">
+              <div class="spinner"></div>
+              <span>Loading recent batches...</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Quick AI Copilot Assistant on Dashboard -->
+  <div class="panel" style="display: flex; flex-direction: column;">
+    <div class="panel-header">
+      <h2 class="panel-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00f2fe" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 12L2.1 12.5"></path><path d="M16 16l4.5 4.5"></path></svg>
+        <span>AI Copilot Live</span>
+      </h2>
+      <span class="grounded-badge">Grounded in DB</span>
+    </div>
+
+    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+      Ask natural-language questions about any batch or historical stage.
+    </p>
+
+    <!-- Quick query suggested chips -->
+    <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem;">
+      <button class="chip-btn" style="text-align: left;" onclick="askQuickAi('What is the status of BATCH-0001?')">
+        ⚡ "What is the status of BATCH-0001?"
+      </button>
+      <button class="chip-btn" style="text-align: left;" onclick="askQuickAi('What was the status of BATCH-0001 two days ago?')">
+        ⏳ "What was the status of BATCH-0001 two days ago?"
+      </button>
+      <button class="chip-btn" style="text-align: left;" onclick="askQuickAi('Did BATCH-0001 pass quality inspection?')">
+        🔬 "Did BATCH-0001 pass quality inspection?"
+      </button>
+    </div>
+
+    <div id="quick-ai-result" style="flex: 1; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 0.85rem; font-size: 0.88rem; min-height: 100px; display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+      Select a prompt or ask below to query manufacturing data.
+    </div>
+
+    <form id="quick-ai-form" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+      <input type="text" id="quick-ai-input" class="chat-input" placeholder="Ask AI Copilot..." style="padding: 0.6rem 0.9rem; font-size: 0.85rem;" autocomplete="off">
+      <button type="submit" class="btn btn-accent btn-sm" id="quick-ai-btn">Send</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ],
+  "env": {
+    "SECRET_KEY": "fastenpro-production-secret-key-2026",
+    "OLLAMA_BASE_URL": "http://127.0.0.1:11434",
+    "OLLAMA_MODEL": "gemma3:1b"
+  }
+}

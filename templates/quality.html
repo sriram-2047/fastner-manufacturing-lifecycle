@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Quality Assurance & Metrology — FASTENPRO AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Quality Assurance & Metrology</h1>
+    <p class="page-subtitle">Inspection reports, dimensional tolerance audits, hardness tests, and QA gates.</p>
+  </div>
+  <a href="/ai" class="btn btn-accent">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+    <span>Query Quality AI</span>
+  </a>
+</div>
+
+<!-- Quality KPI Grid -->
+<div class="kpi-grid">
+  <!-- Passed -->
+  <div class="kpi-card completed">
+    <div class="kpi-header">
+      <span class="kpi-label">Passed Inspection</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="qa-passed-count" style="color: #34d399;">--</div>
+    <div class="kpi-footer">
+      <span>100% specification verified</span>
+    </div>
+  </div>
+
+  <!-- Pending Inspection -->
+  <div class="kpi-card total">
+    <div class="kpi-header">
+      <span class="kpi-label">Pending Inspection</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="qa-pending-count" style="color: #38bdf8;">--</div>
+    <div class="kpi-footer">
+      <span>In QA Metrology Lab</span>
+    </div>
+  </div>
+
+  <!-- Quality Hold -->
+  <div class="kpi-card hold">
+    <div class="kpi-header">
+      <span class="kpi-label">Quality Hold (Quarantined)</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="qa-hold-count" style="color: #f87171;">--</div>
+    <div class="kpi-footer">
+      <span>Requires MRB disposition</span>
+    </div>
+  </div>
+
+  <!-- Failed -->
+  <div class="kpi-card hold">
+    <div class="kpi-header">
+      <span class="kpi-label">Failed Inspection</span>
+      <div class="kpi-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </div>
+    </div>
+    <div class="kpi-value" id="qa-failed-count" style="color: #ef4444;">--</div>
+    <div class="kpi-footer">
+      <span>Scrapped / non-recoverable</span>
+    </div>
+  </div>
+</div>
+
+<!-- Inspections Table Panel -->
+<div class="panel">
+  <div class="panel-header">
+    <h2 class="panel-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      <span>Laboratory Metrology & Test Log</span>
+    </h2>
+    <span style="font-size: 0.85rem; color: var(--text-secondary);">ISO 898-1 / DIN Compliance</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="industrial-table" id="quality-table">
+      <thead>
+        <tr>
+          <th>Batch #</th>
+          <th>Product / Part</th>
+          <th>Dimensions</th>
+          <th>Thread Form</th>
+          <th>Surface</th>
+          <th>Hardness</th>
+          <th>Tensile</th>
+          <th>Result</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="quality-tbody">
+        <tr>
+          <td colspan="10" class="loading-placeholder">
+            <div class="spinner"></div>
+            <span>Loading QA inspection logs...</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quality.js') }}"></script>
+{% endblock %}
